@@ -56,7 +56,7 @@ RUN make -j8
 # Project Specific Package
 WORKDIR ${WORK_DIR}
 RUN apt-get install vim -y
-RUN pip install click pandas
+RUN pip install click pandas Pillow
 
 # Download Pretrained Weight
 RUN wget ${PRETRAINED_WEIGHT}
