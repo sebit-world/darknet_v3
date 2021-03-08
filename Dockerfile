@@ -4,6 +4,7 @@ LABEL maintainer="support@sebit.world"
 
 ENV GIT_REPO=https://github.com/AlexeyAB/darknet.git
 ENV GIT_BRANCH=darknet_yolo_v3_optimal
+ENV PRETRAINED_WEIGHT=https://pjreddie.com/media/files/darknet53.conv.74
 
 ENV WORK_DIR=/usr/workspace
 ENV OPENCV_VER=3.4.8
@@ -22,7 +23,10 @@ RUN apt-get update && apt-get install -y software-properties-common wget
 RUN apt-get install -y git
 
 # Clone and checkout darknet v3 to current folder
-RUN git clone ${GIT_REPO} --branch ${GIT_BRANCH} .
+RUN git clone ${GIT_REPO} --branch ${GIT_BRANCH} ${WORK_DIR}/darknet
+
+# Download Pretrained Weight
+RUN wget ${PRETRAINED_WEIGHT} -O ${WORK_DIR}/weights/darknet53.conv.74
 
 # Install Python ${PYTHON_VER}
 RUN add-apt-repository ppa:deadsnakes/ppa && apt-get install -y python${PYTHON_VER} python3-pip python3-dev
@@ -51,9 +55,6 @@ WORKDIR ${WORK_DIR}/darknet
 COPY . .
 RUN make clean
 RUN make -j8
-
-# Download Pretrained Weight
-RUN wget https://pjreddie.com/media/files/darknet53.conv.74 -O ${WORK_DIR}/data/darknet53.conv.74
 
 # Project Specific Package
 WORKDIR ${WORK_DIR}
