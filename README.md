@@ -15,5 +15,5 @@ root@338872906f3e:/usr/workspace# ll darknet/darknet
 ```
 
 ------------
-Made with <span style="color: #e25555;">&hearts;</span> in Hong Kong by [sebit.world](www.sebit.world)
+Made with <span style="color: #e25555;">&hearts;</span> in Hong Kong by [sebit.world](https://www.sebit.world)
 
