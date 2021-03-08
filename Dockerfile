@@ -25,9 +25,6 @@ RUN apt-get install -y git
 # Clone and checkout darknet v3 to current folder
 RUN git clone ${GIT_REPO} --branch ${GIT_BRANCH} ${WORK_DIR}/darknet
 
-# Download Pretrained Weight
-RUN wget ${PRETRAINED_WEIGHT} -O ${WORK_DIR}/weights/darknet53.conv.74
-
 # Install Python ${PYTHON_VER}
 RUN add-apt-repository ppa:deadsnakes/ppa && apt-get install -y python${PYTHON_VER} python3-pip python3-dev
 RUN ln -s /usr/bin/python${PYTHON_VER} /usr/bin/python
@@ -60,6 +57,9 @@ RUN make -j8
 WORKDIR ${WORK_DIR}
 RUN apt-get install vim -y
 RUN pip install click pandas
+
+# Download Pretrained Weight
+RUN wget ${PRETRAINED_WEIGHT}
 
 WORKDIR ${WORK_DIR}
 CMD [ ]
